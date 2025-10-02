@@ -42,26 +42,76 @@ Drop views first with DROP VIEW IF EXISTS view_name;
 
 📖 Interview Questions & Answers
 Question	Answer
-What is a view?
-A virtual table based on a SQL query.
-Can we update data through a view?
-Yes, if it’s a simple single-table view without aggregation.
-What is a materialized view?
-A view where query results are stored physically for faster access.
-Difference between view and table?
-Table stores data; view stores query only.
-How to drop a view?
+1️⃣ What is a view?
+
+A virtual table based on a SQL query
+Example:
+
+CREATE VIEW recent_books AS
+SELECT * FROM Book WHERE published_year > 2000;
+
+
+2️⃣ Can we update data through a view?
+
+Yes, only for simple single-table views without aggregation
+
+3️⃣ What is a materialized view?
+
+A view where results are stored physically for faster access
+
+4️⃣ Difference between view and table?
+
+Feature	Table	View
+Storage	Physical	Query only
+Updates	Always possible	Only simple views
+Security	Full	Restrict columns/rows
+
+5️⃣ How to drop a view?
+
 DROP VIEW view_name;
-Why use views?
-For abstraction, security, and reuse of queries.
-Can we create indexed views?
-Only in some databases like SQL Server.
-How to secure data using views?
-Grant access to view only, restrict columns/rows.
-What are limitations of views?
-Cannot update multi-table/aggregate views; no physical storage; performance overhead.
-How does WITH CHECK OPTION work?
-Ensures updates/inserts via view meet the view’s conditions.
+
+
+6️⃣ Why use views?
+
+Simplify complex queries
+
+Reuse SQL logic
+
+Restrict access to sensitive data
+
+7️⃣ Can we create indexed views?
+
+Only in some databases (SQL Server)
+
+MySQL & SQLite do not support indexed views
+
+8️⃣ How to secure data using views?
+
+Grant access to view only
+
+Restrict columns/rows
+Example:
+
+GRANT SELECT ON recent_books TO user_name;
+
+
+9️⃣ What are limitations of views?
+
+Cannot update multi-table or aggregate views
+
+No physical storage (except materialized views)
+
+Some performance overhead
+
+🔟 How does WITH CHECK OPTION work?
+
+Ensures INSERT/UPDATE via view meets the view’s conditions
+Example:
+
+CREATE VIEW recent_books AS
+SELECT * FROM Book
+WHERE published_year > 2000
+WITH CHECK OPTION;
 
 
 📑 Key Concepts
